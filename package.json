@@ -1,0 +1,28 @@
+{
+  "name": "TheAddressHolding",
+  "version": "1.0.0",
+  "description": "This project is designed to help users create and manage educational content easily. It provides a user-friendly interface and a variety of tools to streamline the content creation process.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently \"cd frontend && npm run dev\" \"npm run start:server\"",
+    "start:server": "cd backend && npm run start:dev",
+    "build": "cd frontend && npm run build",
+    "start": "node backend/dist/main",
+    "install:dependencies": "npm install && cd frontend && npm install && cd ../backend && npm install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devmohamedkh/TheAddressHolding.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/devmohamedkh/TheAddressHolding/issues"
+  },
+  "homepage": "https://github.com/devmohamedkh/TheAddressHolding#readme",
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
