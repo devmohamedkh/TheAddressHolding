@@ -7,8 +7,11 @@ import { WinstonModule } from 'nest-winston';
 import { transports, format } from 'winston';
 import { RequestLoggerMiddleware } from "./middlewares/request-logger.middleware";
 import { TypeOrmModule } from "@nestjs/typeorm";
+<<<<<<< HEAD
 import { ApartmentModule } from './apartment/apartment.module';
 import { ApartmentTypeModule } from './apartment-type/apartment-type.module';
+=======
+>>>>>>> 184e96aebf1c85e17b2b5a8b77085321d037510a
 
 
 @Module({
@@ -57,8 +60,11 @@ import { ApartmentTypeModule } from './apartment-type/apartment-type.module';
     }),  
     UsersModule,
     AuthModule,
+<<<<<<< HEAD
     ApartmentModule,
     ApartmentTypeModule,
+=======
+>>>>>>> 184e96aebf1c85e17b2b5a8b77085321d037510a
   ],
   providers: [AppService],
 })

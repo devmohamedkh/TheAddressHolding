@@ -9,7 +9,11 @@ import {
 } from '@nestjs/swagger';
 import { LocalAuthGuard, JwtRefreshAuthGuard } from '../common/guards';
 import { CurrentUser } from '../common/decorators';
+<<<<<<< HEAD
 import { User } from '../users/entities/user.entity';
+=======
+import { User } from '../users/schema/user.entity';
+>>>>>>> 184e96aebf1c85e17b2b5a8b77085321d037510a
 import { Response } from 'express';
 import { AuthService } from './auth.service';
 import { AuthTokenResponse } from './types';
@@ -26,9 +30,14 @@ export class AuthController {
   async login(
     @CurrentUser() user: User,
     @Res({ passthrough: true }) response: Response,
+<<<<<<< HEAD
   )  {
     return await this.authService.login(user, response);
  
+=======
+  ) : Promise<AuthTokenResponse> {
+    return await this.authService.login(user, response);
+>>>>>>> 184e96aebf1c85e17b2b5a8b77085321d037510a
   }
 
   @Post('refresh-token')

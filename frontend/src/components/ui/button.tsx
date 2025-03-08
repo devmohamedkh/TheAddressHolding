@@ -49,7 +49,11 @@ function Button({
   return (
     <Comp
       data-slot="button"
+<<<<<<< HEAD
       className={cn(buttonVariants({ variant, size, className })) + ' cursor-pointer'}
+=======
+      className={cn(buttonVariants({ variant, size, className }))}
+>>>>>>> 184e96aebf1c85e17b2b5a8b77085321d037510a
       {...props}
     />
   )

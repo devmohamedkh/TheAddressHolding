@@ -28,6 +28,11 @@ const SignIn: React.FC = () => {
             password: Yup.string().required('Required'),
         }),
         onSubmit: async (values) => {
+<<<<<<< HEAD
+=======
+            console.log({ values });
+
+>>>>>>> 184e96aebf1c85e17b2b5a8b77085321d037510a
             setLoading(true)
             const res = await signIn('credentials', {
                 redirect: false,
@@ -44,7 +49,11 @@ const SignIn: React.FC = () => {
                 });
 
             } else {
+<<<<<<< HEAD
                 router.push("/dashboard");
+=======
+                router.push("/dashboard"); // Redirect after successful login
+>>>>>>> 184e96aebf1c85e17b2b5a8b77085321d037510a
             }
         },
     });
