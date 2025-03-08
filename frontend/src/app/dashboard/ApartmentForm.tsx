@@ -48,7 +48,7 @@ const ApartmentForm = ({ isOpen, onClose }: any) => {
     }, [])
 
 
-    const formik = useFormik<Omit<Apartment, 'id'>>({
+    const formik = useFormik<Omit<Apartment, 'id' | 'type'> & { type: number }>({
         initialValues: {
             title: '',
             imageUrl: '',

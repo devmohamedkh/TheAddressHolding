@@ -1,32 +1,55 @@
+'use client'
 import ApartmentCard from '@/components/ApartmentCard';
-import React from 'react';
+import LoaderWithErrorHandler from '@/components/LoaderWithErrorHandler';
+import axiosInstance from '@/lib/axios';
+import { Alert, Apartment } from '@/types';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 
 const ApartmentList: React.FC = () => {
+    const [apartments, setApartments] = useState<Apartment[]>([]);
+    const [loading, setLoading] = useState(false);
+    const [alert, setAlert] = useState<Alert | null>(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+
+    const fetchApartments = async () => {
+        setLoading(true)
+        try {
+            setLoading(true)
+            const response = await axiosInstance.get('/apartments');
+            setApartments(response.data);
+        } catch (error) {
+            setAlert({
+                type: 'error',
+                message: axios.isAxiosError(error) ?
+                    error.response?.data?.message ||
+                    'Ops something was wrong please try again later' :
+                    'Ops something was wrong please try again later'
+            });
+
+        } finally {
+            setLoading(false);
+        }
+    };
+    useEffect(() => {
+        fetchApartments();
+    }, []);
 
 
 
     return (
         <>
 
-            {[...new Array(30)].map(() =>
+            {apartments?.map((apartment) =>
             (
 
-                <ApartmentCard data={{
-                    id: '1',
-                    title: "Luxury Apartment",
-                    location: "Downtown",
-                    price: 2000,
-                    imageUrl: "https://platinumlist.net/guide/wp-content/uploads/2023/03/IMG-worlds-of-adventure-1024x576.webp",
-                    type: "Condo",
-                    phone: "123-456-7890",
-                    description: "A beautiful luxury apartment in downtown.",
-                    bedrooms: 3,
-                    bathrooms: 2,
-                    isAvailable: true
-                }} />
+                <ApartmentCard data={apartment} />
             )
 
             )}
+            <LoaderWithErrorHandler loading={loading} alert={alert} />
+
         </>
     );
 };

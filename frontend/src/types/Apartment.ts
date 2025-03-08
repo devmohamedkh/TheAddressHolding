@@ -1,7 +1,9 @@
+import { ApartmentTypes } from "./ApartmentTypes"
+
 export interface Apartment {
     id: string,
     imageUrl: string,
-    type: number,
+    type: ApartmentTypes,
     title: string,
     phone: string,
     location: string,

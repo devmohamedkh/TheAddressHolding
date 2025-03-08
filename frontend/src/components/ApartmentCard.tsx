@@ -25,7 +25,7 @@ export default function ApartmentCard({
                 <h2 className="text-xl font-bold">{data.title}</h2>
                 <p className="text-gray-600">{data.location}</p>
                 <p className="text-gray-800">${data.price} / month</p>
-                <p className="text-gray-600">{data.type}</p>
+                <p className="text-gray-600">{data.type.name}</p>
                 <p className="text-gray-600">{data.bedrooms} Bedrooms / {data.bathrooms} Bathrooms</p>
             </div>
         </div>
