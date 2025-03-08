@@ -109,7 +109,7 @@ const ApartmentForm = ({ isOpen, onClose }: any) => {
                                     ) : field === 'type' ? (
                                         <Select
                                             onValueChange={(value) => formik.setFieldValue(field, value)}
-                                            value={String(formik.values.type)} // Ensure correct value handling
+                                            value={String(formik.values.type)}
                                         >
                                             <SelectTrigger className={cn('w-full', formik.touched[field] && formik.errors[field] && 'border-red-500')}>
                                                 <SelectValue placeholder="Select type">
@@ -118,7 +118,7 @@ const ApartmentForm = ({ isOpen, onClose }: any) => {
                                             </SelectTrigger>
                                             <SelectContent>
                                                 {apartmentTypes?.map((item) => (
-                                                    <SelectItem key={item.id} value={'' + item.id}>{item.name}</SelectItem> // Ensure `value` is `item.id`
+                                                    <SelectItem key={item.id} value={'' + item.id}>{item.name}</SelectItem>
                                                 ))}
                                             </SelectContent>
                                         </Select>
