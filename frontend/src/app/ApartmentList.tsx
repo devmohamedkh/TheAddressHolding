@@ -2,8 +2,11 @@ import ApartmentCard from '@/components/ApartmentCard';
 import React from 'react';
 
 const ApartmentList: React.FC = () => {
+
+
+
     return (
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 w-full ">
+        <>
 
             {[...new Array(30)].map(() =>
             (
@@ -24,7 +27,7 @@ const ApartmentList: React.FC = () => {
             )
 
             )}
-        </div>
+        </>
     );
 };
 

@@ -36,5 +36,9 @@ export class CreateApartmentDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  price: number;
+
+  @ApiProperty()
+  @IsNotEmpty()
   isAvailable: boolean;
 }

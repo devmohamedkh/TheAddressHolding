@@ -5,31 +5,38 @@ import { MoreHorizontal } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import axiosInstance from '@/lib/axios';
-import { Apartment } from "@/types";
+import { Alert, Apartment } from "@/types";
 import LoaderWithErrorHandler from "@/components/LoaderWithErrorHandler";
 import ApartmentForm from "./ApartmentForm";
 import { Button } from "@/components/ui/button";
+import axios from "axios";
 
 const ApartmentTable = () => {
     const [apartments, setApartments] = useState<Apartment[]>([]);
     const [loading, setLoading] = useState(false);
-    const [alert, setAlert] = useState(null);
+    const [alert, setAlert] = useState<Alert | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    useEffect(() => {
-        const fetchApartments = async () => {
+    const fetchApartments = async () => {
+        setLoading(true)
+        try {
             setLoading(true)
-            try {
-                const response = await axiosInstance.get('/apartments');
-                setApartments(response.data);
-            } catch (error) {
-                console.log(error);
+            const response = await axiosInstance.get('/apartments');
+            setApartments(response.data);
+        } catch (error) {
+            setAlert({
+                type: 'error',
+                message: axios.isAxiosError(error) ?
+                    error.response?.data?.message ||
+                    'Ops something was wrong please try again later' :
+                    'Ops something was wrong please try again later'
+            });
 
-            } finally {
-                setLoading(false)
-
-            }
-        };
+        } finally {
+            setLoading(false);
+        }
+    };
+    useEffect(() => {
         fetchApartments();
     }, []);
 
@@ -50,7 +57,7 @@ const ApartmentTable = () => {
                         return <Image loader={() => img} src={img} alt="Apartment" width={50} height={50} />
                     }
                 },
-                { header: 'Type', accessorKey: 'type' },
+                { header: 'Type', accessorKey: 'type.name' },
                 { header: 'Title', accessorKey: 'title' },
                 { header: 'Phone', accessorKey: 'phone' },
                 { header: 'Location', accessorKey: 'location' },
@@ -74,7 +81,10 @@ const ApartmentTable = () => {
                 }
             ]} data={apartments} />
 
-            <ApartmentForm isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+            <ApartmentForm isOpen={isModalOpen} onClose={() => {
+                setIsModalOpen(false)
+                fetchApartments()
+            }} />
 
 
             <LoaderWithErrorHandler loading={loading} alert={alert} />

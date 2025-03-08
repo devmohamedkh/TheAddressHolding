@@ -6,7 +6,7 @@ import { UpdateApartmentTypeDto } from './dto/update-apartment-type.dto';
 import { ApartmentType } from './entities/apartment-type.entity';
 
 @ApiTags('Apartment Types')
-@Controller('apartment-type')
+@Controller('apartment-types')
 export class ApartmentTypeController {
   constructor(private readonly apartmentTypeService: ApartmentTypeService) {}
 

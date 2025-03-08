@@ -1,10 +1,7 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
 import { AuthURLs } from "./apiUrls";
-<<<<<<< HEAD
 import { signOut } from "next-auth/react";
 
-=======
->>>>>>> 184e96aebf1c85e17b2b5a8b77085321d037510a
 
 
 const axiosInstance: AxiosInstance = axios.create({
@@ -34,11 +31,8 @@ axiosInstance.interceptors.response.use(
           originalRequest._retry = false; 
         }
       }
-<<<<<<< HEAD
     } else {
       signOut()
-=======
->>>>>>> 184e96aebf1c85e17b2b5a8b77085321d037510a
     }
     return Promise.reject(error);
   }

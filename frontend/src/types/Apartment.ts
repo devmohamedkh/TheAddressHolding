@@ -1,7 +1,7 @@
 export interface Apartment {
     id: string,
     imageUrl: string,
-    type: string,
+    type: number,
     title: string,
     phone: string,
     location: string,

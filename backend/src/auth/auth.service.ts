@@ -6,11 +6,7 @@ import {
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { compare, hash } from 'bcryptjs';
-<<<<<<< HEAD
 import { User } from '../users/entities/user.entity';
-=======
-import { User } from '../users/schema/user.entity';
->>>>>>> 184e96aebf1c85e17b2b5a8b77085321d037510a
 import { UsersService } from '../users/users.service';
 import { Response } from 'express';
 import { TokenPayload, AuthTokenResponse } from './types';
@@ -23,11 +19,7 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-<<<<<<< HEAD
   async login(user: User, response: Response) {
-=======
-  async login(user: User, response: Response) : Promise<AuthTokenResponse> {
->>>>>>> 184e96aebf1c85e17b2b5a8b77085321d037510a
     const accessTokenExpiryMs = this.getConfigNumber(
       'JWT_ACCESS_TOKEN_EXPIRATION_MS',
     );
@@ -64,24 +56,15 @@ export class AuthService {
     );
 
     return {
-<<<<<<< HEAD
       accessToken,
       ...user,
     };
-=======
-      accessToken
-    }
->>>>>>> 184e96aebf1c85e17b2b5a8b77085321d037510a
   }
 
   async refreshTokens(
     user: User,
     response: Response,
   ): Promise<AuthTokenResponse> {
-<<<<<<< HEAD
-=======
-
->>>>>>> 184e96aebf1c85e17b2b5a8b77085321d037510a
     const accessTokenExpiryMs = this.getConfigNumber(
       'JWT_ACCESS_TOKEN_EXPIRATION_MS',
     );
@@ -105,22 +88,13 @@ export class AuthService {
     );
 
     return {
-<<<<<<< HEAD
       accessToken: newAccessToken,
     };
-=======
-      accessToken: newAccessToken
-    }
->>>>>>> 184e96aebf1c85e17b2b5a8b77085321d037510a
   }
 
   async logout(user: User, response: Response): Promise<void> {
     await this.usersService.updateUser(
-<<<<<<< HEAD
       { where: { id: user.id } },
-=======
-      { id: user.id },
->>>>>>> 184e96aebf1c85e17b2b5a8b77085321d037510a
       { refreshToken: '' },
     );
     this.setAuthCookies(response, '', '', new Date(0), new Date(0));
@@ -128,7 +102,6 @@ export class AuthService {
 
   async isPasswordMatch(email: string, password: string) {
     try {
-<<<<<<< HEAD
       const user = await this.usersService.getUser({
         where: { email },
         select: [
@@ -146,30 +119,18 @@ export class AuthService {
 
       const isPasswordMatched = await user.validatePassword(password);
 
-=======
-      const user = await this.usersService.getUser({  email });
-      
-      
-      const isPasswordMatched = await compare(password, user.password);
->>>>>>> 184e96aebf1c85e17b2b5a8b77085321d037510a
       if (!isPasswordMatched) {
         throw new BadRequestException('Credentials are not valid.');
       }
 
       return user;
     } catch (err) {
-<<<<<<< HEAD
-=======
-      console.log(err);
-      
->>>>>>> 184e96aebf1c85e17b2b5a8b77085321d037510a
       throw new BadRequestException('Credentials are not valid.');
     }
   }
 
   async verifyUserRefreshToken(refreshToken: string, userId: string) {
     try {
-<<<<<<< HEAD
       const user = await this.usersService.getUser({
         where: { id: userId },
         select: [
@@ -183,9 +144,6 @@ export class AuthService {
           'name',
         ],
       });
-=======
-      const user = await this.usersService.getUser({ id: userId });
->>>>>>> 184e96aebf1c85e17b2b5a8b77085321d037510a
       const isRefreshTokenValid = await compare(
         refreshToken,
         user.refreshToken!,
@@ -238,13 +196,8 @@ export class AuthService {
   ): Promise<void> {
     const hashedToken = await hash(refreshToken, 10);
     await this.usersService.updateUser(
-<<<<<<< HEAD
       { where: { id: userId } },
       { refreshToken: hashedToken },
-=======
-      { id: userId },
-       { refreshToken: hashedToken },
->>>>>>> 184e96aebf1c85e17b2b5a8b77085321d037510a
     );
   }
 
@@ -264,11 +217,6 @@ export class AuthService {
       secure: isProduction,
       expires: accessTokenExpiry,
     });
-<<<<<<< HEAD
-
-=======
-    
->>>>>>> 184e96aebf1c85e17b2b5a8b77085321d037510a
     if (refreshToken && refreshTokenExpiry) {
       response.cookie('RefreshToken', refreshToken, {
         httpOnly: isProduction,

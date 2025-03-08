@@ -7,18 +7,10 @@ import {
   Query, 
   UseGuards 
 } from '@nestjs/common';
-<<<<<<< HEAD
 import { CreateUserRequest } from './dto';
 import { UsersService } from './users.service';
 import { JwtAuthGuard } from '../common/guards';
 import { User } from './entities/user.entity';
-=======
-import {  ApiOperation, ApiResponse, ApiOkResponse } from '@nestjs/swagger';
-import { CreateUserRequest, UserResponseDto } from './dto';
-import { UsersService } from './users.service';
-import { JwtAuthGuard } from '../common/guards';
-import { User } from './schema/user.entity';
->>>>>>> 184e96aebf1c85e17b2b5a8b77085321d037510a
 import { ApiCreateUserOperation, ApiGetUserByIdOperation, ApiGetUsersOperation } from './swaggerHelpers';
 
 @Controller('users')
@@ -32,11 +24,7 @@ export class UsersController {
   }
 
   @Get()
-<<<<<<< HEAD
   @UseGuards(JwtAuthGuard)
-=======
-  // @UseGuards(JwtAuthGuard)
->>>>>>> 184e96aebf1c85e17b2b5a8b77085321d037510a
   @ApiGetUsersOperation()
   async getUsers(
     @Query('page') page: number = 1,
@@ -53,10 +41,6 @@ export class UsersController {
   @UseGuards(JwtAuthGuard)
   @ApiGetUserByIdOperation()
   async getUserById(@Param('id') id: string): Promise<User> {
-<<<<<<< HEAD
     return this.usersService.getUser({ where: { id }});
-=======
-    return this.usersService.getUser({id :id });
->>>>>>> 184e96aebf1c85e17b2b5a8b77085321d037510a
   }
 }
